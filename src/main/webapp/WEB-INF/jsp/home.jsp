@@ -15,7 +15,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     --%>
     <!-- jQuery library -->
-    <%--<script src="<c:url value="/resources/static/js/jquery-3.2.1.min.js" />"></script>--%>
+    <script src="<c:url value="/resources/static/js/jquery-3.2.1.min.js" />"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="/resources/static/css/bootstrap.min.css">
     <!-- Latest compiled JavaScript -->
@@ -27,14 +27,19 @@
     <script type="text/javascript" src='/resources/dynatree/js/jquery.dynatree.js'></script>
     <link rel='stylesheet' type='text/css' href='/resources/dynatree/css/ui.dynatree.css'>
     <!-- Local dev JS and CSS defined  -->
-    <script src="<c:url value="/resources/main/js/home.js" />"></script>
+    <script type="text/javascript" src="<c:url value="/resources/main/js/home.js" />"></script>
     <link rel="stylesheet" href="<c:url value="/resources/main/css/style.css" />">
 </head>
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-5" id="tree">.col-sm-4</div>
-            <div class="col-sm-7">.col-sm-8</div>
+            <div class="col-sm-5" id="tree"></div>
+
+            <div class="col-sm-7">
+                <button id="debugbtn">click</button>
+                <div id="debugmsg">debug</div>
+                <div id="errormsg">error_msg</div>
+            </div>
         </div>
     </div>
 

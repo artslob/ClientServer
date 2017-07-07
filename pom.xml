@@ -12,10 +12,12 @@
     
     <properties>
         <spring.version>4.3.9.RELEASE</spring.version>
+        <jackson.version>1.9.13</jackson.version>
+        <jackson.version>2.7.5</jackson.version>
     </properties>
     
     <dependencies>
-        
+        <!-- Spring MVC -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
@@ -34,10 +36,18 @@
             <version>${spring.version}</version>
         </dependency>
     
+        <!-- jstl -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
+        </dependency>
+    
+        <!-- jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
     
     </dependencies>
