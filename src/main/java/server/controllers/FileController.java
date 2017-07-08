@@ -8,17 +8,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import server.filesystem.FileWalker;
+import server.filesystem.TreeStructureCreator;
 
 @Controller
 public class FileController {
 
     @RequestMapping(value = "/filetree", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity fileTree(){
-        String s = "hello<br/>hello";
-        FileWalker fw = new FileWalker();
         try {
-            String json = new ObjectMapper().writeValueAsString(fw.walkTree("D:\\test"));
+            String json = new ObjectMapper().writeValueAsString(TreeStructureCreator.walkTree("D:\\test"));
             System.out.println(json);
             return new ResponseEntity<>(json, HttpStatus.OK);
         } catch (JsonProcessingException e) {
