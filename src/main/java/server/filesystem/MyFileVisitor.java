@@ -22,12 +22,13 @@ public class MyFileVisitor extends SimpleFileVisitor<Path> {
 
     @Override
     public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
-        Directory new_dir = new Directory(dir.getFileName().toString());
         if (cur_dir == null) {
+            Directory new_dir = new Directory(dir.toString());
             cur_dir = new_dir;
             result.add(new_dir);
         }
         else {
+            Directory new_dir = new Directory(dir.getFileName().toString());
             new_dir.setParent(cur_dir);
             cur_dir.getChildren().add(new_dir);
             cur_dir = new_dir;

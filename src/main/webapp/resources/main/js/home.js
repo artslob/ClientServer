@@ -16,24 +16,22 @@ function create_tree() {
         url: serverAddress + '/filetree',
         type: "GET",
         success: function (data, textStatus, jqXHR) {
-            // var tree = JSON.parse(data);
-            var tree = data;
             $("#tree").dynatree({
                 persist: true,
-                onActivate: function (node) {
-                    function showProps(obj, objName) {
-                        var result = "";
-                        for (var i in obj) {
-                            if (obj.hasOwnProperty(i)) {
-                                result += objName + "." + i + " = " + obj[i].itemName + "\n";
+                autoCollapse: false,
+                onClick: function (node, event) {
+                    if(node.getEventTargetType(event) == "title"){
+                        node.expand(false);
+                        var table = $("#filetable");
+                        table.find("tr").remove();
+                        for (var i in node.data.files) {
+                            if (node.data.files.hasOwnProperty(i)) {
+                                table.append('<tr><td>' + node.data.files[i].itemName + '</td></tr>');
                             }
                         }
-                        return result;
                     }
-                    alert(showProps(node.data.files, "node.data.files"));
                 },
-                children: tree
-
+                children: data
             });
         },
         error: function (xhr, status, error) {
@@ -66,4 +64,14 @@ function error_msg(e) {
     var msg = $("#errormsg");
     msg.empty();
     msg.append(e);
+}
+
+function showProps(obj, objName) {
+    var result = "";
+    for (var i in obj) {
+        if (obj.hasOwnProperty(i)) {
+            result += objName + "." + i + " = " + obj[i].itemName + "\n";
+        }
+    }
+    return result;
 }

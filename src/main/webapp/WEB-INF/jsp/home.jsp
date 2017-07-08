@@ -39,6 +39,15 @@
                 <button id="debugbtn">click</button>
                 <div id="debugmsg">debug</div>
                 <div id="errormsg">error_msg</div>
+                <table class="table table-condensed">
+                    <thead>
+                    <tr>
+                        <th>Filename</th>
+                    </tr>
+                    </thead>
+                    <tbody id="filetable">
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
