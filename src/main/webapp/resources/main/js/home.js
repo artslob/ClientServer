@@ -7,36 +7,31 @@ $(document).ready(function () {
     //debug_btn();
 });
 
-function create_tree() {
-    /*$.ajax({
-        url: serverAddress + '/filetree',
-        type: "GET",
-        success: function (data, textStatus, jqXHR) {
-            tree = JSON.parse(data)
-        },
-        error: function (xhr, status, error) {
-            error_msg(xhr + ' ' + status + ' ' + ' ' + error);
-        }
-    });*/
-    /*var str = '[{"title": "Item 1"}]';
-    var tree = JSON.parse(str);
-    //alert(tree.title);
-    $("#tree").dynatree({
-        persist: true,
-        children: tree
+function isFile() {
 
-    });*/
+}
+
+function create_tree() {
     $.ajax({
-        //url: 'http://gturnquist-quoters.cfapps.io/api/random',
         url: serverAddress + '/filetree',
         type: "GET",
         success: function (data, textStatus, jqXHR) {
-            //alert(JSON.parse(data));
-            alert(data);
-            var tree = JSON.parse(data);
-            //alert(tree.title);
+            // var tree = JSON.parse(data);
+            var tree = data
             $("#tree").dynatree({
                 persist: true,
+                onActivate: function (node) {
+                    function showProps(obj, objName) {
+                        var result = "";
+                        for (var i in obj) {
+                            if (obj.hasOwnProperty(i)) {
+                                result += objName + "." + i + " = " + obj[i].itemName + "\n";
+                            }
+                        }
+                        return result;
+                    }
+                    alert(showProps(node.data.files, "node.data.files"));
+                },
                 children: tree
 
             });
@@ -53,10 +48,7 @@ function debug_btn() {
         url: serverAddress + '/filetree',
         type: "GET",
         success: function (data, textStatus, jqXHR) {
-            //alert(JSON.parse(data));
-            alert(data);
-            var str = '[{"title": "Item 1"}]';
-            debug_msg(data)
+            var tree = JSON.parse(data);
         },
         error: function (xhr, status, error) {
             error_msg(xhr + ' ' + status + ' ' + ' ' + error);
