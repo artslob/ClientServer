@@ -30,7 +30,7 @@ function delete_node() {
         type: "POST",
         data: {node_name: path},
         success: function (data, textStatus, jqXHR) {
-
+            get_active_node().remove();
         },
         error: function (xhr, status, error) {
             error_msg(xhr + ' ' + status + ' ' + ' ' + error);
