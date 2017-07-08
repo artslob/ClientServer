@@ -40,7 +40,7 @@
                         <span class="glyphicon glyphicon-plus"></span> Create
                     </button>
                     <button type="button" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-remove"></span> Create
+                        <span class="glyphicon glyphicon-remove"></span> Delete
                     </button>
                 </div>
             </div>

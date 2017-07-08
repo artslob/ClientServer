@@ -7,8 +7,6 @@ $(document).ready(function () {
     debug_btn();
 });
 
-var selectedNode;
-
 function create_tree() {
     $.ajax({
         url: serverAddress + '/filetree',
@@ -19,7 +17,6 @@ function create_tree() {
                 autoCollapse: false,
                 onClick: function (node, event) {
                     if(node.getEventTargetType(event) == "title"){
-                        selectedNode = node;
                         node.expand(false);
                         var table = $("#filetable");
                         table.find("tr").remove();
@@ -66,15 +63,11 @@ function debug_btn() {
 }
 
 function debug_msg(e) {
-    var msg = $("#debugmsg");
-    msg.empty();
-    msg.append(e);
+    $("#debugmsg").text(e)
 }
 
 function error_msg(e) {
-    var msg = $("#errormsg");
-    msg.empty();
-    msg.append(e);
+    $("#errormsg").text(e)
 }
 
 function showProps(obj, objName) {
