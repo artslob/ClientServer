@@ -17,7 +17,7 @@ function create_tree() {
         type: "GET",
         success: function (data, textStatus, jqXHR) {
             // var tree = JSON.parse(data);
-            var tree = data
+            var tree = data;
             $("#tree").dynatree({
                 persist: true,
                 onActivate: function (node) {

@@ -1,9 +1,6 @@
 package server.filesystem.model;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +19,17 @@ public class Directory {
 
     @JsonProperty("files")
     private List<Item> files;
+
+    @JsonIgnore
+    private Directory parent;
+
+    public Directory getParent() {
+        return parent;
+    }
+
+    public void setParent(Directory parent) {
+        this.parent = parent;
+    }
 
     public Directory(String title) {
         this.title = title;
