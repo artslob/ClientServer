@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import server.filesystem.FileWalker;
 
 @Controller
@@ -17,22 +18,19 @@ public class FileController {
         String s = "hello<br/>hello";
         FileWalker fw = new FileWalker();
         try {
-            /*Directory dir = new Directory("dir");
-            List<Directory> subdirs = new ArrayList<>();
-            subdirs.add(new Directory("subdir1"));
-            subdirs.add(new Directory("subdir2"));
-            dir.setChildren(subdirs);
-            List<Item> files = new ArrayList<>();
-            files.add(new Item("file1"));
-            files.add(new Item("file2"));
-            dir.setFiles(files);*/
             String json = new ObjectMapper().writeValueAsString(fw.walkTree("D:\\test"));
             System.out.println(json);
-            return new ResponseEntity<String>(json, HttpStatus.OK);
+            return new ResponseEntity<>(json, HttpStatus.OK);
         } catch (JsonProcessingException e) {
             System.out.println(e);
             return new ResponseEntity<>("JsonException", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @RequestMapping(value = "/delete_node", method = RequestMethod.POST)
+    public ResponseEntity deleteNode(@RequestParam("node_name") String node_name){
+        System.out.println(node_name);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

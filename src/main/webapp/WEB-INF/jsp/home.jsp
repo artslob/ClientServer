@@ -15,11 +15,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     --%>
     <!-- jQuery library -->
-    <script src="<c:url value="/resources/static/js/jquery-3.2.1.min.js" />"></script>
-    <!-- Latest compiled and minified CSS -->
+    <script type="text/javascript" src="<c:url value="/resources/static/js/jquery-3.2.1.min.js" />"></script>
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/resources/static/css/bootstrap.min.css">
-    <!-- Latest compiled JavaScript -->
-    <script src="<c:url value="/resources/static/js/bootstrap.min.js" />"></script>
+    <!-- Bootstrap JavaScript -->
+    <script type="text/javascript" src="<c:url value="/resources/static/js/bootstrap.min.js" />"></script>
     <!-- Dynatree -->
     <script type="text/javascript" src='/resources/dynatree/js/jquery.js'></script>
     <script type="text/javascript" src='/resources/dynatree/js/jquery-ui.custom.js'></script>
@@ -32,6 +32,20 @@
 </head>
 <body>
     <div class="container-fluid">
+        <br/>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-plus"></span> Create
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-remove"></span> Create
+                    </button>
+                </div>
+            </div>
+        </div>
+        <br/>
         <div class="row">
             <div class="col-sm-5" id="tree"></div>
 
