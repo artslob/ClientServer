@@ -39,7 +39,7 @@
                     <button type="button" class="btn btn-primary">
                         <span class="glyphicon glyphicon-plus"></span> Create
                     </button>
-                    <button type="button" class="btn btn-primary">
+                    <button type="button" class="btn btn-primary" id="delete_node_btn">
                         <span class="glyphicon glyphicon-remove"></span> Delete
                     </button>
                 </div>

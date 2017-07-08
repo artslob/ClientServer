@@ -4,8 +4,39 @@ $(document).ready(function () {
     serverAddress = 'http://' + window.location.host;
     create_tree();
     $("#debugbtn").click(debug_btn);
+    $("#delete_node_btn").click(delete_node);
     debug_btn();
 });
+
+function get_active_node() {
+    return $("#tree").dynatree("getTree").getActiveNode();
+}
+
+function get_full_path(el) {
+    var res = el.data.title;
+    el.visitParents(function (node) {
+        if (node.data.title == null)
+            return false;
+        res = node.data.title + "\\" + res;
+    }, false);
+    return res;
+}
+
+function delete_node() {
+    var selected = get_active_node();
+    var path = get_full_path(selected);
+    $.ajax({
+        url: serverAddress + '/delete_node',
+        type: "POST",
+        data: {node_name: path},
+        success: function (data, textStatus, jqXHR) {
+
+        },
+        error: function (xhr, status, error) {
+            error_msg(xhr + ' ' + status + ' ' + ' ' + error);
+        }
+    });
+}
 
 function create_tree() {
     $.ajax({
