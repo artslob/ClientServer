@@ -25,7 +25,7 @@ public class FileController {
     public ResponseEntity fileTree(){
         try {
             String json = new ObjectMapper().writeValueAsString(TreeStructureCreator.walkTree("D:\\test"));
-            System.out.println(json);
+            //System.out.println(json);
             return new ResponseEntity<>(json, HttpStatus.OK);
         } catch (JsonProcessingException e) {
             System.out.println(e);
@@ -33,7 +33,7 @@ public class FileController {
         }
     }
 
-    @RequestMapping(value = "/delete_node", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "/delete_node", method = RequestMethod.POST)
     public ResponseEntity deleteNode(@RequestParam("node_name") String node_name){
         System.out.println(node_name);
         Path rootPath = Paths.get(node_name);
@@ -47,6 +47,19 @@ public class FileController {
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/create_node")
+    public ResponseEntity createNode(@RequestParam("node_name") String node_name) {
+        File new_folder = new File(node_name);
+        if (!new_folder.exists()) {
+            if (new_folder.mkdir()) {
+                return new ResponseEntity<>(HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+        else return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }

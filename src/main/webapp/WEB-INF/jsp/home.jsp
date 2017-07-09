@@ -36,7 +36,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-primary">
+                    <button type="button" class="btn btn-primary" id="create_node_btn">
                         <span class="glyphicon glyphicon-plus"></span> Create
                     </button>
                     <button type="button" class="btn btn-primary" id="delete_node_btn">
