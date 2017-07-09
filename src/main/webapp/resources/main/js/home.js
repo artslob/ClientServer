@@ -33,21 +33,10 @@ function create_node() {
     });
     parent.expand(true);
     editNode(child, function () {
-        var title = child.data.title;
-        if (!title || !title.trim() || title.length === 0) {
-            alert('Folder title isn`t appropriate');
+        if (!is_correct_name(child)) {
+            alert('Folder already exist or name isn`t appropriate');
             child.remove();
             return;
-        }
-        var children = parent.getChildren();
-        for (var i = 0; i < children.length; i++) {
-            if (child.data.key != children[i].data.key &&
-                child.data.title == children[i].data.title) {
-                //TODO: create error panel
-                alert('This folder already exists');
-                child.remove();
-                return;
-            }
         }
         $.ajax({
             url: serverAddress + '/create_node',
@@ -63,6 +52,21 @@ function create_node() {
             }
         });
     });
+}
+
+function is_correct_name(node) {
+    var title = node.data.title;
+    if (!title || !title.trim() || title.length === 0) {
+        return false;
+    }
+    var children = node.parent.getChildren();
+    for (var i = 0; i < children.length; i++) {
+        if (node.data.key != children[i].data.key &&
+            node.data.title == children[i].data.title) {
+            return false;
+        }
+    }
+    return true;
 }
 
 function editNode(node, afterInput) {
@@ -130,6 +134,35 @@ function create_tree(tree_structure) {
                         table.append('<tr><td>' + node.data.files[i].itemName + '</td></tr>');
                     }
                 }
+            }
+        },
+        onKeydown: function (node, event) {
+            if (event.which == 113) { //[F2]
+                var old_path = get_full_path(node);
+                var old_title = node.data.title;
+                editNode(node, function () {
+                    if (node.data.title == old_title)
+                        return;
+                    if (!is_correct_name(node)) {
+                        alert('Folder already exist');
+                        node.setTitle(old_title);
+                        return;
+                    }
+                    var new_path = get_full_path(node);
+                    $.ajax({
+                        url: serverAddress + '/rename_node',
+                        type: "POST",
+                        data: {from: old_path, to: new_path},
+                        success: function (data, textStatus, jqXHR) {
+                        },
+                        error: function (xhr, status, error) {
+                            node.setTitle(old_title);
+                            alert('Failed to rename folder');
+                            error_msg(xhr + ' ' + status + ' ' + ' ' + error);
+                        }
+                    });
+                });
+                return false;
             }
         },
         children: tree_structure

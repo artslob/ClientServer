@@ -62,4 +62,17 @@ public class FileController {
         else return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @RequestMapping(value = "/rename_node")
+    public ResponseEntity renameNode(@RequestParam("from") String from, @RequestParam("to") String to) {
+        File old_folder = new File(from);
+        File new_folder = new File(to);
+        if (!old_folder.exists() || new_folder.exists()){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        else if (old_folder.renameTo(new_folder)) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        else return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }
