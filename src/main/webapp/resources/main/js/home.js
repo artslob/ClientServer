@@ -33,11 +33,16 @@ function create_node() {
     });
     parent.expand(true);
     editNode(child, function () {
-        debug_msg(child.data.title);
+        var title = child.data.title;
+        if (!title || !title.trim() || title.length === 0) {
+            alert('Folder title isn`t appropriate');
+            child.remove();
+            return;
+        }
         var children = parent.getChildren();
-        for (var i = 0; i < children.length; i++){
-            if(child.data.key != children[i].data.key &&
-                child.data.title == children[i].data.title){
+        for (var i = 0; i < children.length; i++) {
+            if (child.data.key != children[i].data.key &&
+                child.data.title == children[i].data.title) {
                 //TODO: create error panel
                 alert('This folder already exists');
                 child.remove();
@@ -45,22 +50,22 @@ function create_node() {
             }
         }
         $.ajax({
-         url: serverAddress + '/create_node',
-         type: "POST",
-         data: {node_name: get_full_path(child)},
-         success: function (data, textStatus, jqXHR) {
-         child.activate();
-         },
-         error: function (xhr, status, error) {
-         child.remove();
-         alert('Failed to create folder');
-         error_msg(xhr + ' ' + status + ' ' + ' ' + error);
-         }
-         });
+            url: serverAddress + '/create_node',
+            type: "POST",
+            data: {node_name: get_full_path(child)},
+            success: function (data, textStatus, jqXHR) {
+                child.activate();
+            },
+            error: function (xhr, status, error) {
+                child.remove();
+                alert('Failed to create folder');
+                error_msg(xhr + ' ' + status + ' ' + ' ' + error);
+            }
+        });
     });
 }
 
-function editNode(node, afterInput){
+function editNode(node, afterInput) {
     var prevTitle = node.data.title,
         tree = node.tree;
     // Disable dynatree mouse- and key handling
@@ -70,8 +75,8 @@ function editNode(node, afterInput){
     // Focus <input> and bind keyboard handler
     $("input#editNode")
         .focus()
-        .keydown(function(event){
-            switch( event.keyCode || event.which ) {
+        .keydown(function (event) {
+            switch (event.keyCode || event.which) {
                 case 13: // [enter]
                     // simulate blur to accept new value
                     $(this).blur();
@@ -82,7 +87,7 @@ function editNode(node, afterInput){
                     $(this).blur();
                     break;
             }
-        }).blur(function(event){
+        }).blur(function (event) {
         // Accept new value, when user leaves <input>
         var input = $("input#editNode");
         var title = input.val();
@@ -116,7 +121,7 @@ function create_tree(tree_structure) {
         persist: true,
         autoCollapse: false,
         onClick: function (node, event) {
-            if(node.getEventTargetType(event) == "title"){
+            if (node.getEventTargetType(event) == "title") {
                 node.expand(false);
                 var table = $("#filetable");
                 table.find("tr").remove();
