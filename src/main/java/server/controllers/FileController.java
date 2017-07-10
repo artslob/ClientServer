@@ -22,23 +22,19 @@ public class FileController {
     public ResponseEntity fileTree(){
         try {
             String json = new ObjectMapper().writeValueAsString(TreeStructureCreator.walkTree("D:\\test"));
-            //System.out.println(json);
             return new ResponseEntity<>(json, HttpStatus.OK);
         } catch (JsonProcessingException e) {
-            System.out.println(e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @RequestMapping(value = "/delete_node", method = RequestMethod.POST)
     public ResponseEntity deleteNode(@RequestParam("node_name") String node_name){
-        System.out.println(node_name);
         Path rootPath = Paths.get(node_name);
         try {
             Files.walk(rootPath, FileVisitOption.FOLLOW_LINKS)
                     .sorted(Comparator.reverseOrder())
                     .map(Path::toFile)
-                    .peek(System.out::println)
                     .forEach(File::delete);
         } catch (IOException e) {
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);

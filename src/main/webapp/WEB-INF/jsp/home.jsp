@@ -50,11 +50,7 @@
         <br/>
         <div class="row">
             <div class="col-sm-5" id="tree"></div>
-
             <div class="col-sm-7">
-                <button id="debugbtn">click</button>
-                <div id="debugmsg">debug</div>
-                <div id="errormsg">error_msg</div>
                 <table class="table table-condensed">
                     <thead>
                     <tr>
@@ -70,6 +66,5 @@
             </div>
         </div>
     </div>
-
 </body>
 </html>

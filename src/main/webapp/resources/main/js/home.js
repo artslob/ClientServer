@@ -3,10 +3,8 @@ var serverAddress;
 $(document).ready(function () {
     serverAddress = 'http://' + window.location.host;
     ajax_to_create_tree();
-    $("#debugbtn").click(debug_btn);
     $("#delete_node_btn").click(delete_node);
     $("#create_node_btn").click(create_node);
-    debug_btn();
 });
 
 function get_active_node() {
@@ -253,26 +251,4 @@ function ajax_to_create_tree() {
             error_msg(xhr + ' ' + status + ' ' + ' ' + error);
         }
     });
-}
-
-function debug_btn() {
-
-}
-
-function debug_msg(e) {
-    $("#debugmsg").text(e)
-}
-
-function error_msg(e) {
-    $("#errormsg").text(e)
-}
-
-function showProps(obj, objName) {
-    var result = "";
-    for (var i in obj) {
-        if (obj.hasOwnProperty(i)) {
-            result += objName + "." + i + " = " + obj[i].itemName + "\n";
-        }
-    }
-    return result;
 }
