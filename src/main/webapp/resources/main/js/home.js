@@ -1,7 +1,7 @@
 var serverAddress;
 
 $(document).ready(function () {
-    serverAddress = 'http://' + window.location.host;
+    serverAddress = window.location.href.split('#')[0];
     ajax_to_create_tree();
     $("#delete_node_btn").click(delete_node);
     $("#create_node_btn").click(create_node);
@@ -113,7 +113,7 @@ function delete_node() {
             get_active_node().remove();
         },
         error: function (xhr, status, error) {
-            alert(xhr + ' ' + status + ' ' + ' ' + error);
+            alert('Failed to delete node');
         }
     });
 }
@@ -248,7 +248,7 @@ function ajax_to_create_tree() {
             create_tree(data)
         },
         error: function (xhr, status, error) {
-            alert(xhr + ' ' + status + ' ' + ' ' + error);
+            alert('Failed to get file tree from server');
         }
     });
 }

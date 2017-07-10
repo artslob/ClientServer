@@ -17,15 +17,15 @@
     <!-- jQuery library -->
     <script type="text/javascript" src="<c:url value="/resources/static/js/jquery-3.2.1.min.js" />"></script>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/resources/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/bootstrap.min.css">
     <!-- Bootstrap JavaScript -->
     <script type="text/javascript" src="<c:url value="/resources/static/js/bootstrap.min.js" />"></script>
     <!-- Dynatree -->
-    <script type="text/javascript" src='/resources/dynatree/js/jquery.js'></script>
-    <script type="text/javascript" src='/resources/dynatree/js/jquery-ui.custom.js'></script>
-    <script type="text/javascript" src='/resources/dynatree/js/jquery.cookie.js'></script>
-    <script type="text/javascript" src='/resources/dynatree/js/jquery.dynatree.js'></script>
-    <link rel='stylesheet' type='text/css' href='/resources/dynatree/css/ui.dynatree.css'>
+    <script type="text/javascript" src='${pageContext.request.contextPath}/resources/dynatree/js/jquery.js'></script>
+    <script type="text/javascript" src='${pageContext.request.contextPath}/resources/dynatree/js/jquery-ui.custom.js'></script>
+    <script type="text/javascript" src='${pageContext.request.contextPath}/resources/dynatree/js/jquery.cookie.js'></script>
+    <script type="text/javascript" src='${pageContext.request.contextPath}/resources/dynatree/js/jquery.dynatree.js'></script>
+    <link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/resources/dynatree/css/ui.dynatree.css'>
     <!-- Local dev JS and CSS defined  -->
     <script type="text/javascript" src="<c:url value="/resources/main/js/home.js" />"></script>
     <link rel="stylesheet" href="<c:url value="/resources/main/css/style.css" />">
