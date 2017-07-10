@@ -12,16 +12,26 @@ import server.filesystem.TreeStructureCreator;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.FileVisitOption;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Comparator;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 @Controller
 public class FileController {
+    private static String default_path;
+    static {
+        ResourceBundle bundle = ResourceBundle.getBundle("path", Locale.US);
+        default_path = bundle.getString("default.path");
+    }
 
     @RequestMapping(value = "/filetree", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity fileTree(){
         try {
-            String json = new ObjectMapper().writeValueAsString(TreeStructureCreator.walkTree("D:\\test"));
+            String json = new ObjectMapper().writeValueAsString(TreeStructureCreator.walkTree(default_path));
             return new ResponseEntity<>(json, HttpStatus.OK);
         } catch (JsonProcessingException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
