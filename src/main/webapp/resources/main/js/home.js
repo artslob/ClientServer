@@ -46,7 +46,7 @@ function create_node() {
             error: function (xhr, status, error) {
                 child.remove();
                 alert('Failed to create folder');
-                error_msg(xhr + ' ' + status + ' ' + ' ' + error);
+                alert(xhr + ' ' + status + ' ' + ' ' + error);
             }
         });
     });
@@ -113,7 +113,7 @@ function delete_node() {
             get_active_node().remove();
         },
         error: function (xhr, status, error) {
-            error_msg(xhr + ' ' + status + ' ' + ' ' + error);
+            alert(xhr + ' ' + status + ' ' + ' ' + error);
         }
     });
 }
@@ -162,7 +162,7 @@ function create_tree(tree_structure) {
                         error: function (xhr, status, error) {
                             node.setTitle(old_title);
                             alert('Failed to rename folder');
-                            error_msg(xhr + ' ' + status + ' ' + ' ' + error);
+                            alert(xhr + ' ' + status + ' ' + ' ' + error);
                         }
                     });
                 });
@@ -229,7 +229,7 @@ function create_tree(tree_structure) {
                     },
                     error: function (xhr, status, error) {
                         alert('Failed to replace folder');
-                        error_msg(xhr + ' ' + status + ' ' + ' ' + error);
+                        alert(xhr + ' ' + status + ' ' + ' ' + error);
                     }
                 });
                 // expand the drop target
@@ -248,7 +248,7 @@ function ajax_to_create_tree() {
             create_tree(data)
         },
         error: function (xhr, status, error) {
-            error_msg(xhr + ' ' + status + ' ' + ' ' + error);
+            alert(xhr + ' ' + status + ' ' + ' ' + error);
         }
     });
 }

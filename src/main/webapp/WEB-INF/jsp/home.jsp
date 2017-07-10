@@ -1,10 +1,10 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=CP1251" pageEncoding="CP1251" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML  PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en">
 <head>
-    <title>Home</title>
-    <meta charset="utf-8">
+    <title>Домашняя страница</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=CP1251">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%--
     <!-- jQuery library -->
