@@ -6,6 +6,7 @@ import server.filesystem.model.Item;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
@@ -63,7 +64,11 @@ public class TreeStructureCreator {
                 cur_dir.getChildren().add(new_dir);
             }
             else if (attrs.isRegularFile()) {
-                cur_dir.getFiles().add(new Item(file.getFileName().toString()));
+                String file_name = file.getFileName().toString();
+                Instant lastAccessTime = attrs.lastAccessTime().toInstant();
+                Instant lastModifiedTime = attrs.lastModifiedTime().toInstant();
+                Item item = new Item(file_name, lastAccessTime, lastModifiedTime, attrs.size());
+                cur_dir.getFiles().add(item);
             }
             return FileVisitResult.CONTINUE;
         }

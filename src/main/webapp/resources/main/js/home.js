@@ -131,7 +131,13 @@ function create_tree(tree_structure) {
                 table.find("tr").remove();
                 for (var i in node.data.files) {
                     if (node.data.files.hasOwnProperty(i)) {
-                        table.append('<tr><td>' + node.data.files[i].itemName + '</td></tr>');
+                        var content = '<tr>';
+                        content += '<td>' + node.data.files[i].itemName + '</td>';
+                        content += '<td>' + node.data.files[i].lastAccessTime + '</td>';
+                        content += '<td>' + node.data.files[i].lastModifiedTime + '</td>';
+                        content += '<td>' + node.data.files[i].size + '</td>';
+                        content += '</tr>';
+                        table.append(content);
                     }
                 }
             }

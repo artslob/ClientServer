@@ -57,6 +57,9 @@
                     <thead>
                     <tr>
                         <th>Filename</th>
+                        <th>Last Access Time</th>
+                        <th>Last Modified Time</th>
+                        <th>Size</th>
                     </tr>
                     </thead>
                     <tbody id="filetable">
