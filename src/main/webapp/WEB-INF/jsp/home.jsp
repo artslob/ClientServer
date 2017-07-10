@@ -43,6 +43,8 @@
                         <span class="glyphicon glyphicon-remove"></span> Delete
                     </button>
                 </div>
+                <i class="glyphicon glyphicon-question-sign" style="margin-left: 30px"
+                   id="tooltip" title="To rename folder:&#013;1. Click folder name.&#013;2. Press F2."></i>
             </div>
         </div>
         <br/>
