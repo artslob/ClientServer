@@ -165,6 +165,73 @@ function create_tree(tree_structure) {
                 return false;
             }
         },
+        dnd: {
+            onDragStart: function (node) {
+                /** This function MUST be defined to enable dragging for the tree.
+                 *  Return false to cancel dragging of node.
+                 */
+                return true;
+            },
+            onDragStop: function (node) {
+                // This function is optional.
+            },
+            autoExpandMS: 300,
+            preventVoidMoves: true, // Prevent dropping nodes 'before self', etc.
+            onDragEnter: function (node, sourceNode) {
+                /** sourceNode may be null for non-dynatree droppables.
+                 *  Return false to disallow dropping on node. In this case
+                 *  onDragOver and onDragLeave are not called.
+                 *  Return 'over', 'before, or 'after' to force a hitMode.
+                 *  Return ['before', 'after'] to restrict available hitModes.
+                 *  Any other return value will calc the hitMode from the cursor position.
+                 */
+                return true;
+            },
+            onDragOver: function (node, sourceNode, hitMode) {
+                // Return false to disallow dropping this node.
+                // Prevent dropping a parent below it's own child
+                if (node.isDescendantOf(sourceNode)) {
+                    return false;
+                }
+                // Prohibit creating childs in non-folders (only sorting allowed)
+                if (!node.data.isFolder && hitMode === "over") {
+                    return "after";
+                }
+            },
+            onDrop: function (node, sourceNode, hitMode, ui, draggable) {
+                //This function MUST be defined to enable dropping of items on the tree.
+                var source = get_full_path(sourceNode),
+                    target;
+                switch (hitMode) {
+                    case "before":
+                    case "after":
+                        target = get_full_path(node.parent) + "\\" + sourceNode.data.title;
+                        if (get_full_path(sourceNode.parent) == target){
+                            // in same folder, ajax not required
+                            sourceNode.move(node, hitMode);
+                            return true;
+                        }
+                        break;
+                    case "over":
+                        target = get_full_path(node) + "\\" + sourceNode.data.title;
+                        break;
+                }
+                $.ajax({
+                    url: serverAddress + '/replace_node',
+                    type: "POST",
+                    data: {source: source, target: target},
+                    success: function (data, textStatus, jqXHR) {
+                        sourceNode.move(node, hitMode);
+                    },
+                    error: function (xhr, status, error) {
+                        alert('Failed to replace folder');
+                        error_msg(xhr + ' ' + status + ' ' + ' ' + error);
+                    }
+                });
+                // expand the drop target
+                sourceNode.expand(true);
+            }
+        },
         children: tree_structure
     });
 }

@@ -12,10 +12,7 @@ import server.filesystem.TreeStructureCreator;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.FileVisitOption;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.util.Comparator;
 
 @Controller
@@ -70,6 +67,19 @@ public class FileController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         else if (old_folder.renameTo(new_folder)) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        else return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @RequestMapping(value = "/replace_node")
+    public ResponseEntity replaceNode(@RequestParam("source") String source, @RequestParam("target") String target) {
+        File source_path = new File(source);
+        File target_path = new File(target);
+        if (!source_path.exists()) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        if (source_path.renameTo(target_path)) {
             return new ResponseEntity<>(HttpStatus.OK);
         }
         else return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
